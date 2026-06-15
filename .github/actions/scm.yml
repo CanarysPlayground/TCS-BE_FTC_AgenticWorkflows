@@ -1,10 +1,22 @@
-name: SCM
+name: SCM Validation
 
 runs:
   using: composite
 
   steps:
-    - name: Install Dependencies
+    - name: Verify Repository Structure
       shell: bash
       run: |
-        npm install
+        echo "Checking repository structure..."
+        ls -la
+
+    - name: Verify Required Files
+      shell: bash
+      run: |
+        test -f app.js
+        test -f package.json
+
+    - name: Show Commit Details
+      shell: bash
+      run: |
+        git log -1 --oneline
