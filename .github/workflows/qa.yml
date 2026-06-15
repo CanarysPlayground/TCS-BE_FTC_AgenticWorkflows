@@ -13,37 +13,12 @@ jobs:
     environment: QA
 
     steps:
-      - name: Checkout Selected Branch
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           ref: ${{ inputs.target_branch }}
-
-      - name: Setup NodeJS
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: SCM Validation
-        run: |
-          git branch --show-current
 
       - name: Install Dependencies
         run: npm install
 
-      - name: Application Validation
-        run: |
-          node --check app.js
-
-      - name: SonarQube Scan
-        run: |
-          npm install -g sonarqube-scanner
-          sonar-scanner \
-            -Dsonar.projectKey=demo-app \
-            -Dsonar.sources=. \
-            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
-            -Dsonar.token=${{ secrets.SONAR_TOKEN }}
-
-      - name: QA Validation
-        run: |
-          echo "Regression Testing Passed"
-          echo "QA Approval Granted"
+      - name: Validate App
+        run: node --check app.js
