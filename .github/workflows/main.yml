@@ -12,6 +12,18 @@ on:
           - release-2.0
           - QA
 
+run_scm:
+        description: Run SCM Scan
+        required: true
+        type: boolean
+        default: true
+
+      run_sast:
+        description: Run SAST Scan
+        required: true
+        type: boolean
+        default: true
+
 jobs:
 
   sit:
