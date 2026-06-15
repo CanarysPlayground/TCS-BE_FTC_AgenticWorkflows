@@ -18,7 +18,7 @@ run_scm:
         type: boolean
         default: true
 
-      run_sast:
+run_sast:
         description: Run SAST Scan
         required: true
         type: boolean
