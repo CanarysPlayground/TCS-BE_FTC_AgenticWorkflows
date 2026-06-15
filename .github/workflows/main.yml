@@ -9,6 +9,8 @@ on:
         type: choice
         options:
           - release-1.0
+          - release-2.0
+          - QA
 
 jobs:
 
