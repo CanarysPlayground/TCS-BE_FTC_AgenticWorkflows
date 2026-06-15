@@ -1,16 +1,15 @@
-name: SAST
+name: SAST Scan
 
 runs:
   using: composite
 
   steps:
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v3
-      with:
-        languages: javascript
+    - name: Install Semgrep
+      shell: bash
+      run: |
+        python3 -m pip install semgrep
 
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v3
-
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
+    - name: Run Semgrep Scan
+      shell: bash
+      run: |
+        semgrep --config=auto .
