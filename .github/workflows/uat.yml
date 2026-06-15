@@ -7,6 +7,14 @@ on:
         required: true
         type: string
 
+      run_scm:
+        required: true
+        type: boolean
+
+      run_sast:
+        required: true
+        type: boolean
+
 jobs:
   uat:
     runs-on: ubuntu-latest
