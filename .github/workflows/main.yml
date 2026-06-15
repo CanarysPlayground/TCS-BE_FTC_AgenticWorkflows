@@ -1,0 +1,31 @@
+name: Deployment Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: Select Branch
+        required: true
+        type: choice
+        options:
+          - release-1.0
+          - release-2.0
+
+jobs:
+
+  sit:
+    uses: ./.github/workflows/sit.yml
+    with:
+      target_branch: ${{ inputs.target_branch }}
+
+  qa:
+    needs: sit
+    uses: ./.github/workflows/qa.yml
+    with:
+      target_branch: ${{ inputs.target_branch }}
+
+  uat:
+    needs: qa
+    uses: ./.github/workflows/uat.yml
+    with:
+      target_branch: ${{ inputs.target_branch }}
