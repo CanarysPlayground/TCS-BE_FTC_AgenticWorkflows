@@ -25,6 +25,12 @@ jobs:
         with:
           ref: ${{ inputs.target_branch }}
 
+      - name: Display Branch Information
+        run: |
+          echo "Workflow Branch: ${{ github.ref_name }}"
+          echo "Selected Branch: ${{ inputs.target_branch }}"
+
+
       - name: SCM
         if: ${{ inputs.run_scm }}
         uses: ./.github/actions/scm
