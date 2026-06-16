@@ -49,7 +49,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: katalon
-          path: katalon
+          path: functional-tests
 
       - name: Smoke Test
         run: |
