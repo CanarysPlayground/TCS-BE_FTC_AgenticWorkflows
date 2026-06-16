@@ -33,11 +33,11 @@ jobs:
 
       - name: SCM
         #if: ${{ inputs.run_scm }}
-        uses: ./.github/actions/scm
+        uses: ./.github/actions/scm/action.yml
 
       - name: SAST
         #if: ${{ inputs.run_sast }}
-        uses: ./.github/actions/sast
+        uses: ./.github/actions/sast/action.yml
 
       - name: Start Application
         run: |
