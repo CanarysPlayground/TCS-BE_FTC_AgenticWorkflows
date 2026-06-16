@@ -54,17 +54,17 @@ jobs:
       - name: Smoke Test
         run: |
           chmod +x katalon/smoke-tests/smoke-test.sh
-          ./functional-tests/smoke-tests/smoke-test.sh
+          ./katalon/smoke-tests/smoke-test.sh
 
       - name: Product Test
         run: |
           chmod +x katalon/product-tests/product-test.sh
-          ./functional-tests/product-tests/product-test.sh
+          ./katalon/product-tests/product-test.sh
 
       - name: Navigation Test
         run: |
           chmod +x katalon/navigation-tests/navigation-test.sh
-          ./functional-tests/navigation-tests/navigation-test.sh
+          ./katalon/navigation-tests/navigation-test.sh
 
       - name: Install Dependencies
         run: npm install
