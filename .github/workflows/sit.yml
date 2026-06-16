@@ -32,12 +32,39 @@ jobs:
 
 
       - name: SCM
-        if: ${{ inputs.run_scm }}
+        #if: ${{ inputs.run_scm }}
         uses: ./.github/actions/scm
 
       - name: SAST
-        if: ${{ inputs.run_sast }}
+        #if: ${{ inputs.run_sast }}
         uses: ./.github/actions/sast
+
+      - name: Start Application
+        run: |
+          npm install
+          node app.js &
+          sleep 10
+
+      - name: Checkout Functional Tests
+        uses: actions/checkout@v4
+        with:
+          ref: katalon
+          path: katalon
+
+      - name: Smoke Test
+        run: |
+          chmod +x katalon/smoke-tests/smoke-test.sh
+          ./functional-tests/smoke-tests/smoke-test.sh
+
+      - name: Product Test
+        run: |
+          chmod +x katalon/product-tests/product-test.sh
+          ./functional-tests/product-tests/product-test.sh
+
+      - name: Navigation Test
+        run: |
+          chmod +x katalon/navigation-tests/navigation-test.sh
+          ./functional-tests/navigation-tests/navigation-test.sh
 
       - name: Install Dependencies
         run: npm install
