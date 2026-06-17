@@ -91,6 +91,13 @@ jobs:
           echo "Overall,$TOTAL,$PASSED,$FAILED" >> functional-report.csv
 
           cat functional-report.csv
+
+      - name: Upload Functional Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: functional-test-report
+          path: functional-report.csv
+      
       - name: Install Dependencies
         run: npm install
 
