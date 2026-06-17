@@ -1,7 +1,15 @@
 #!/bin/bash
 
-echo "Running Product API Test..."
+TOTAL=1
+PASSED=0
+FAILED=0
 
-curl -f http://localhost:3000/products
+if curl -f http://localhost:3000/products; then
+    PASSED=1
+else
+    FAILED=1
+fi
 
-echo "Product Test Passed"
+echo "PRODUCT_TOTAL=$TOTAL" > product-result.txt
+echo "PRODUCT_PASSED=$PASSED" >> product-result.txt
+echo "PRODUCT_FAILED=$FAILED" >> product-result.txt
