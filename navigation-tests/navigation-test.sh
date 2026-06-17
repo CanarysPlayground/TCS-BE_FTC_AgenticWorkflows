@@ -1,9 +1,21 @@
 #!/bin/bash
 
-echo "Running Navigation Test..."
+TOTAL=2
+PASSED=0
+FAILED=0
 
-curl -f http://localhost:3000/
+if curl -f http://localhost:3000/; then
+    PASSED=$((PASSED+1))
+else
+    FAILED=$((FAILED+1))
+fi
 
-curl -f http://localhost:3000/products
+if curl -f http://localhost:3000/products; then
+    PASSED=$((PASSED+1))
+else
+    FAILED=$((FAILED+1))
+fi
 
-echo "Navigation Test Passed"
+echo "NAV_TOTAL=$TOTAL" > navigation-result.txt
+echo "NAV_PASSED=$PASSED" >> navigation-result.txt
+echo "NAV_FAILED=$FAILED" >> navigation-result.txt
