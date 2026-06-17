@@ -66,23 +66,31 @@ jobs:
           chmod +x katalon/navigation-tests/navigation-test.sh
           ./katalon/navigation-tests/navigation-test.sh
 
-      - name: Functional Testing Summary
+      - name: Generate Functional Report
         run: |
+          IFS=',' read ST SP SF < smoke-result.txt
+          IFS=',' read PT PP PF < product-result.txt
+          IFS=',' read NT NP NF < navigation-result.txt
+
+          TOTAL=$((ST + PT + NT))
+          PASSED=$((SP + PP + NP))
+          FAILED=$((SF + PF + NF))
+
           echo "=================================="
           echo "Functional Testing Summary"
           echo "=================================="
-          echo "Total Tests : 100"
-          echo "Passed      : 95"
-          echo "Failed      : 5"
-          echo "Coverage    : 95%"
+          echo "Total Tests : $TOTAL"
+          echo "Passed      : $PASSED"
+          echo "Failed      : $FAILED"
           echo "=================================="
 
-      - name: Generate Functional Report
-        run: |
-          cat smoke-result.txt
-          cat product-result.txt
-          cat navigation-result.txt
+          echo "TestSuite,Total,Passed,Failed" > functional-report.csv
+          echo "Smoke,$ST,$SP,$SF" >> functional-report.csv
+          echo "Product,$PT,$PP,$PF" >> functional-report.csv
+          echo "Navigation,$NT,$NP,$NF" >> functional-report.csv
+          echo "Overall,$TOTAL,$PASSED,$FAILED" >> functional-report.csv
 
+          cat functional-report.csv
       - name: Install Dependencies
         run: npm install
 
