@@ -77,6 +77,12 @@ jobs:
           echo "Coverage    : 95%"
           echo "=================================="
 
+      - name: Generate Functional Report
+        run: |
+          cat smoke-result.txt
+          cat product-result.txt
+          cat navigation-result.txt
+
       - name: Install Dependencies
         run: npm install
 
