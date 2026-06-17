@@ -4,12 +4,14 @@ TOTAL=1
 PASSED=0
 FAILED=0
 
+echo "Running Smoke Test..."
+
 if curl -f http://localhost:3000/; then
     PASSED=1
+    echo "Smoke Test Passed"
 else
     FAILED=1
+    echo "Smoke Test Failed"
 fi
 
-echo "SMOKE_TOTAL=$TOTAL" > smoke-result.txt
-echo "SMOKE_PASSED=$PASSED" >> smoke-result.txt
-echo "SMOKE_FAILED=$FAILED" >> smoke-result.txt
+echo "$TOTAL,$PASSED,$FAILED" > smoke-result.txt
