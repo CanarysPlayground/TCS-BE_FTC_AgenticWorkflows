@@ -1,10 +1,10 @@
 # branch-execution2
 
-                  Repository Structure
-                        main.yml
-                            ↓
-                        sit.yml
-                            ↓
-                        qa.yml
-                            ↓
-                        uat.yml
+                                                                                Repository Structure
+                                                                                      main.yml
+                                                                                          ↓
+                                                                                        it.yml
+                                                                                          ↓
+                                                                                        qa.yml
+                                                                                          ↓
+                                                                                        uat.yml
