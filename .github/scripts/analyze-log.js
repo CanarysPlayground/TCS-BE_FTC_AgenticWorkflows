@@ -1,10 +1,45 @@
 const fs = require("fs");
+const ModelClient = require("@azure-rest/ai-inference").default;
+const { isUnexpected } = require("@azure-rest/ai-inference");
+const { AzureKeyCredential } = require("@azure/core-auth");
 
-console.log("Reading smoke.log...");
+const token = process.env.GITHUB_TOKEN;
+const endpoint = "https://models.github.ai/inference";
+const model = "openai/gpt-4.1";
 
-const smokeLog = fs.readFileSync("smoke.log", "utf8");
+async function main() {
 
-console.log("====================================");
-console.log("SMOKE LOG");
-console.log("====================================");
-console.log(smokeLog);
+  const smokeLog = fs.readFileSync("smoke.log", "utf8");
+
+  const client = ModelClient(
+    endpoint,
+    new AzureKeyCredential(token)
+  );
+
+  const response = await client.path("/chat/completions").post({
+    body: {
+      messages: [
+        {
+          role: "system",
+          content: "You are an expert DevOps engineer."
+        },
+        {
+          role: "user",
+          content: `Analyze this smoke test log and tell me the root cause:\n\n${smokeLog}`
+        }
+      ],
+      temperature: 0.2,
+      model: model
+    }
+  });
+
+  if (isUnexpected(response)) {
+    throw response.body.error;
+  }
+
+  console.log("AI ANALYSIS");
+  console.log("======================");
+  console.log(response.body.choices[0].message.content);
+}
+
+main().catch(console.error);
