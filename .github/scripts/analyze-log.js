@@ -24,8 +24,23 @@ async function main() {
           content: "You are an expert DevOps engineer."
         },
         {
-          role: "user",
-          content: `Analyze this smoke test log and tell me the root cause:\n\n${smokeLog}`
+          {
+            role: "user",
+            content: `
+          Analyze the following smoke test log.
+
+          Return ONLY in this format:
+
+          Issue Title:
+          Severity:
+          Root Cause:
+          Impact:
+          Recommended Action:
+
+          Log:
+          ${smokeLog}
+          `
+          }
         }
       ],
       temperature: 0.2,
