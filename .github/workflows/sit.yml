@@ -82,18 +82,25 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node .github/scripts/analyze-log.js
 
+      - name: Read AI Analysis
+        if: steps.smoke.outcome == 'failure'
+        run: |
+          echo "AI_ANALYSIS<<EOF" >> $GITHUB_ENV
+          cat ai-analysis.txt >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
       - name: Create Issue on Smoke Failure
         if: steps.smoke.outcome == 'failure'
         uses: actions/github-script@v7
         env:
-          SMOKE_ERROR: ${{ env.SMOKE_ERROR }}
+          AI_ANALYSIS: ${{ env.AI_ANALYSIS }}
         with:
           script: |
             await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: `Smoke Test Failure - ${context.runId}`,
-              body: process.env.SMOKE_ERROR
+              title: `AI Detected Smoke Test Failure - ${context.runId}`,
+              body: process.env.AI_ANALYSIS
             })
       
       - name: Product Test
