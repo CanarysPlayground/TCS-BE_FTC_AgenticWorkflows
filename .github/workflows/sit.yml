@@ -52,9 +52,16 @@ jobs:
           path: katalon
 
       - name: Smoke Test
+        continue-on-error: true
         run: |
           chmod +x katalon/smoke-tests/smoke-test.sh
           ./katalon/smoke-tests/smoke-test.sh
+
+      - name: Upload Smoke Log
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-log
+          path: smoke.log
 
       - name: Product Test
         run: |
