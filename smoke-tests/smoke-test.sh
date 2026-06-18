@@ -25,7 +25,7 @@ FAILED=0
 
 echo "Running Smoke Test..."
 
-curl -v http://localhost:3000/login > smoke.log 2>&1
+curl -f -v http://localhost:3000/login > smoke.log 2>&1
 
 if [ $? -eq 0 ]; then
     PASSED=1
@@ -36,3 +36,7 @@ else
 fi
 
 echo "$TOTAL,$PASSED,$FAILED" > smoke-result.txt
+
+if [ $FAILED -eq 1 ]; then
+    exit 1
+fi
