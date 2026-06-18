@@ -18,31 +18,29 @@ async function main() {
 
   const response = await client.path("/chat/completions").post({
     body: {
-      messages: [
-        {
-          role: "system",
-          content: "You are an expert DevOps engineer."
-        },
-        {
-          {
-            role: "user",
-            content: `
-          Analyze the following smoke test log.
+     messages: [
+      {
+        role: "system",
+        content: "You are an expert DevOps engineer."
+      },
+      {
+        role: "user",
+        content: `
+    Analyze the following smoke test log.
 
-          Return ONLY in this format:
+    Return ONLY in this format:
 
-          Issue Title:
-          Severity:
-          Root Cause:
-          Impact:
-          Recommended Action:
+    Issue Title:
+    Severity:
+    Root Cause:
+    Impact:
+    Recommended Action:
 
-          Log:
-          ${smokeLog}
-          `
-          }
-        }
-      ],
+    Log:
+    ${smokeLog}
+    `
+      }
+    ],
       temperature: 0.2,
       model: model
     }
