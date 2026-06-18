@@ -78,6 +78,8 @@ jobs:
 
       - name: Analyze Smoke Log
         if: steps.smoke.outcome == 'failure'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node .github/scripts/analyze-log.js
 
       - name: Create Issue on Smoke Failure
