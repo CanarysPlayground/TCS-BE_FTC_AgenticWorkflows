@@ -8,3 +8,8 @@
                                                                                         qa.yml
                                                                                           ↓
                                                                                         uat.yml
+                                                                              
+                                                                              
+                                                                                  Composite Actions:
+                                                                                        - scm
+                                                                                        - sast
