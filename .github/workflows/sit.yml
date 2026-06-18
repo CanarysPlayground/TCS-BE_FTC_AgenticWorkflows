@@ -52,6 +52,7 @@ jobs:
           path: katalon
 
       - name: Smoke Test
+        id: smoke
         continue-on-error: true
         run: |
           chmod +x katalon/smoke-tests/smoke-test.sh
