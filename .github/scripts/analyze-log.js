@@ -49,10 +49,13 @@ async function main() {
   if (isUnexpected(response)) {
     throw response.body.error;
   }
+const analysis = response.body.choices[0].message.content;
 
-  console.log("AI ANALYSIS");
-  console.log("======================");
-  console.log(response.body.choices[0].message.content);
+console.log("AI ANALYSIS");
+console.log("======================");
+console.log(analysis);
+
+fs.writeFileSync("ai-analysis.txt", analysis);
 }
 
 main().catch(console.error);
