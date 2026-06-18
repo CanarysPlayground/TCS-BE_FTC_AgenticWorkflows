@@ -72,6 +72,10 @@ jobs:
           cat smoke.log >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
+      - name: Install AI Dependencies
+        run: |
+          npm install @azure-rest/ai-inference @azure/core-auth
+
       - name: Analyze Smoke Log
         if: steps.smoke.outcome == 'failure'
         run: node .github/scripts/analyze-log.js
