@@ -1,0 +1,31 @@
+name: Agentic Issue Creator
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-issue:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create GitHub Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "Smoke Test Failure - Login Endpoint",
+              body: `
+              Smoke test failed during SIT execution.
+
+              Observed Error:
+              HTTP 404 Not Found
+
+              Impact:
+              Login endpoint unavailable.
+
+              Action Required:
+              Verify endpoint implementation.
+              `
+            })
