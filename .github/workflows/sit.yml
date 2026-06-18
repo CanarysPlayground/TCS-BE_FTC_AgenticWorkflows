@@ -64,6 +64,14 @@ jobs:
           name: smoke-log
           path: smoke.log
 
+      - name: Read Smoke Log
+        if: steps.smoke.outcome == 'failure'
+        id: readlog
+        run: |
+          echo "SMOKE_ERROR<<EOF" >> $GITHUB_ENV
+          cat smoke.log >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
       - name: Create Issue on Smoke Failure
         if: steps.smoke.outcome == 'failure'
         uses: actions/github-script@v7
