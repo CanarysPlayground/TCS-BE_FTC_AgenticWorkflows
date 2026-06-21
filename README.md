@@ -52,3 +52,25 @@
                                                                                 ├── Generate Functional Report
                                                                                 │
                                                                                 └── Upload Functional Report
+
+
+
+                                                                                Smoke Test
+                                                                                │
+                                                                                ├── PASS
+                                                                                │      │
+                                                                                │      └── Continue Pipeline
+                                                                                │
+                                                                                └── FAIL
+                                                                                      │
+                                                                                      ├── Upload Smoke Log
+                                                                                      │
+                                                                                      ├── Read Smoke Log
+                                                                                      │
+                                                                                      ├── Install AI Dependencies
+                                                                                      │
+                                                                                      ├── Analyze Smoke Log Using AI
+                                                                                      │
+                                                                                      ├── Generate ai-analysis.txt
+                                                                                      │
+                                                                                      └── Create GitHub Issue
